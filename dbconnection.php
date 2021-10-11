@@ -20,24 +20,14 @@
 
 		if($result->num_rows > 0){
 			while ($row = $result->fetch_assoc()) {
-				
-    			// echo "Name: " . $row['name']. " - Age: " . $row['age']. " - Mail-ID:" . $row['mailid']. " - Username:" .$row['username']." - Password:".$row['password'];
-    
-
-    			global $name ;
-    			global $age ;
-    			global $mailid ;
-    			global $username ;
- 				global $password ;
-
-
-
-    			$name = $row['name'];
-    			$age = $row['age'];
-    			$mailid = $row['mailid'];
-    			$username = $row['username'];
-    			$password = $row['password'];
-				// header ('location:dashboard.php');
+				echo "Signin Successfully";
+				echo "<br>";				
+    			echo "<br> Name: " . $row['name']. 
+    				 "<br> Age: " . $row['age']. 
+    				 "<br> Mail-ID:" . $row['mailid'].
+    				 "<br> Username:" .$row['username'].
+    				 "<br> Password:".$row['password'];
+				echo "<br> <a href='signin.php'><button>Signout</button></a>";
 
 			}
 		}else{
@@ -111,10 +101,4 @@
 	if(isset($_POST['signout'])){
 		header('location:signin.php');
 	}
-			echo $name;
-			echo $age;
-			echo $mailid;
-			echo $username;
-			echo $password;
-
 ?>
