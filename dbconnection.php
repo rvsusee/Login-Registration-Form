@@ -4,7 +4,14 @@
 		die("Connection Failed : ".$conn->connect_error);
 	}
 
-	//Login
+		$name;
+		$age;
+		$mailid;
+		$username;
+		$password;
+
+
+	//Signin
 	if(isset($_POST['signin'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -12,10 +19,26 @@
 		$result = $conn->query($sql);
 
 		if($result->num_rows > 0){
-			while ($rows = $result->fetch_assoc()) {
-				echo "Login Successfully";
+			while ($row = $result->fetch_assoc()) {
 				
-				header ('location:dashboard.php');
+    			// echo "Name: " . $row['name']. " - Age: " . $row['age']. " - Mail-ID:" . $row['mailid']. " - Username:" .$row['username']." - Password:".$row['password'];
+    
+
+    			global $name ;
+    			global $age ;
+    			global $mailid ;
+    			global $username ;
+ 				global $password ;
+
+
+
+    			$name = $row['name'];
+    			$age = $row['age'];
+    			$mailid = $row['mailid'];
+    			$username = $row['username'];
+    			$password = $row['password'];
+				// header ('location:dashboard.php');
+
 			}
 		}else{
 			echo "Login Failed";
@@ -78,17 +101,20 @@
 		}
 	}
 
+	//delete account
+	if(isset($_POST['deleteaccount'])){
 
 
+	}
 
 	//signout
 	if(isset($_POST['signout'])){
 		header('location:signin.php');
 	}
-
-
-
-
-
+			echo $name;
+			echo $age;
+			echo $mailid;
+			echo $username;
+			echo $password;
 
 ?>
