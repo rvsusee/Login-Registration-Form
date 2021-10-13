@@ -1,3 +1,7 @@
+<?php
+	include "dbconnection.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +10,27 @@
 	<link rel="stylesheet" type="text/css" href="resources/bootstrap.min.css">
 </head>
 <body class="col-lg-4 container mt-5 card">
-	<form action="dbconnection.php"method="POST">
+	<h1 style="text-align: center;margin-top: 20px;">Sign up</h1>
+	<?php
+		//signup
+		if(isset($_POST['signup'])){
+			$name = $_POST['name'];
+			$age = $_POST['age'];
+			$mailid = $_POST['mailid'];
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$sql = "INSERT INTO `userdata` (`name`, `age`, `mailid`, `username`, `password`) VALUES ('".$name."', '".$age."', '".$mailid."', '".$username."', '".$password."');";
+			$result = $connection->query($sql);		
 			
-		<h1 style="text-align: center;margin-top: 20px;">Sign up</h1>
+			echo "<script>
+					window.alert('Signup Successfully');
+					window.open('signin.php','_SELF');
+					</script>";
+		}
+	?>
+
+	<form action="signup.php"method="POST">
+			
 		<div class="form-group">
 			<label name="name">Full Name</label>
 			<input 
@@ -64,7 +86,7 @@
 			<button class="btn btn-dark" type="reset" name="reset">Reset</button>
 			<button class="btn btn-success" type="submit" name="signup">Submit</button>	
 		</div>
-		<label>You have already Account , <a href="signin.php">click here to Signin!</a></label>
+		<label>You have already Account , <a href="signin.php">Signin here!</a></label>
 	</form>
 </body>
 </html>

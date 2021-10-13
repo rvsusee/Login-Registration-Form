@@ -1,3 +1,7 @@
+<?php
+	include 'dbconnection.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +10,45 @@
 	<link rel="stylesheet" type="text/css" href="resources/bootstrap.min.css">
 </head>
 <body class="col-lg-4 container mt-5 card">
-	<form action="dbconnection.php"method="POST">
+	<h1 style="text-align: center;margin-top: 20px;">Forget Password</h1>
+	<?
+		//forget password
+		if(isset($_POST['showpass'])){
+			$name = $_POST['name'];
+			$age = $_POST['age'];
+			$mailid = $_POST['mailid'];
+			$username = $_POST['username'];
+			$sql = "SELECT * FROM `userdata` WHERE `name`='".$name."' and `age`='".$age."' and `mailid`='".$mailid."' and `username`='".$username."';";	
+
+			$result = $conn->query($sql);
+
+			if($result->num_rows > 0){
+				echo "<h1>User Found</h1>";
+				while($row = $result->fetch_assoc()){
+					echo "<br> Name :";
+					echo $row["name"];
+					echo "<br> Age :";
+					echo $row["age"];
+					echo "<br> Mail ID :";
+					echo $row["mailid"];
+					echo "<br> Username :";
+					echo $row["username"];
+					echo "<br> Password :";
+					echo $row["password"];
+					echo "<br>";
+					echo "<h2>Your Password is :<?php $pas?></h1> ";		
+		
+				}
+				echo "<h2><a href='signin.php'>Signin here</a></h1> ";		
 			
-		<h1 style="text-align: center;margin-top: 20px;">Forget Password</h1>
+			}else{
+				echo "<h1> User not Found<a href='signup.php'>Signup here</a></h1> ";		
+			}
+		}
+	?>
+
+	<form action="forgetpass.php"method="POST">
+			
 		<div class="form-group">
 			<label name="name">Full Name</label>
 			<input 
@@ -59,20 +99,4 @@
 		<label>You Don't have an Account ! <a href="signup.php">click here to Signup!</a></label>
 	</form>
 </body>
-
-<!-- <body>
-	<form action="dbconnection.php"method="POST">
-		<h1>Forget Password</h1>
-		<h2>Name</h2>
-		<input type="text" name="name">
-		<h2>Age</h2>
-		<input type="text" name="age">
-		<h2>Mail ID</h2>
-		<input type="text" name="mailid">
-		<h2>Username</h2>
-		<input type="text" name="username">
-		<button name="showpass">Submit</button>
-		<h2>Already know Password<a href="signin.php"> sign in here</a></h2>
-	</form>
-</body> -->
 </html>
